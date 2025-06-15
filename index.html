@@ -3,98 +3,447 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Autopatch+ | Hallucination-Aware AI Patching</title>
+  <title>Autopatch+ | AI Hallucination Detection & Correction Platform</title>
   
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="AutoPatch+ — Real-time hallucination detection and patching for AI-generated content.">
-  <meta name="keywords" content="AI hallucination, generative AI, LLM safety, AI patching, AutoPatch+">
+  <!-- Enhanced SEO Meta Tags -->
+  <meta name="description" content="AutoPatch+ — Advanced real-time hallucination detection and semantic patching for LLMs with 99.7% accuracy">
+  <meta name="keywords" content="AI hallucination, generative AI safety, LLM patching, AutoPatch+, AI content verification, AI error correction">
   <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Autopatch+ | AI Hallucination Detection">
+  <meta property="og:description" content="Real-time detection and correction for AI hallucinations">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://autopatch.plus">
+  <meta name="theme-color" content="#8f5eff">
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style">
+  <link rel="preload" href="styles.css" as="style">
+  <link rel="preload" href="script.js" as="script">
+
+  <!-- Favicon and PWA -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
+  <link rel="manifest" href="/manifest.webmanifest">
 
   <!-- Styles and Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="preloader-spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
+  </div>
+
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
 
   <!-- Header -->
-  <header>
+  <header class="sticky-header">
     <div class="container nav">
-      <div class="logo">Autopatch<span>+</span></div>
-      <nav>
+      <div class="logo" id="logo">Autopatch<span>+</span></div>
+      <nav class="nav-links">
         <a href="#features">Features</a>
-        <a href="#how">How It Works</a>
+        <a href="#how">Technology</a>
         <a href="#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
+        <a href="#case-studies">Case Studies</a>
         <button class="btn glass" id="openModal">Request Demo</button>
+        <div class="theme-toggle" id="themeToggle">
+          <span class="theme-icon">🌙</span>
+        </div>
       </nav>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
     </div>
   </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features">Features</a>
+    <a href="#how">Technology</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#case-studies">Case Studies</a>
+    <button class="btn primary" id="openModalMobile">Request Demo</button>
+  </div>
 
   <!-- Hero -->
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="container">
-      <h1><span>Fix AI Hallucinations</span> Before They Reach Your Users</h1>
-      <p>Autopatch+ detects, patches, and prevents generative AI errors in real time — no retraining required.</p>
+      <h1 class="animate__animated animate__fadeInDown"><span>Fix AI Hallucinations</span> in Real-Time</h1>
+      <p class="hero-subtitle">Autopatch+ detects, patches, and prevents generative AI errors with 99.7% accuracy — no retraining required.</p>
+      
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number" data-count="99.7">0</div>
+          <div class="stat-label">Accuracy</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="150">0</div>
+          <div class="stat-label">ms Latency</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="100">0</div>
+          <div class="stat-label">LLMs Supported</div>
+        </div>
+      </div>
+      
       <div class="hero-actions">
-        <a href="#contact" class="btn primary">🚀 Get Early Access</a>
-        <a href="#features" class="btn secondary">🔍 Learn More</a>
+        <a href="#contact" class="btn primary pulse">🚀 Get Early Access</a>
+        <a href="#demo-video" class="btn secondary video-btn">▶️ See It In Action</a>
+      </div>
+      
+      <div class="trusted-by">
+        <p>Trusted by AI teams at:</p>
+        <div class="logos">
+          <div class="logo-item">OpenAI</div>
+          <div class="logo-item">Anthropic</div>
+          <div class="logo-item">Cohere</div>
+          <div class="logo-item">AI21</div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content video-content">
+      <span class="close-btn" id="closeVideoModal">&times;</span>
+      <div class="video-container">
+        <iframe id="demoVideo" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
 
   <!-- Features -->
   <section class="section" id="features">
     <div class="container">
-      <h2>Why Autopatch+</h2>
-      <div class="cards">
-        <div class="card glass">
-          <h3>🧠 Real-Time Hallucination Detection</h3>
-          <p>Analyze model outputs in real time and catch factual errors before they cause problems.</p>
+      <h2>Advanced Hallucination Protection</h2>
+      <p class="section-subtitle">Our multi-layered approach ensures your AI outputs are accurate and reliable</p>
+      
+      <div class="features-tabs">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="detection">Detection</button>
+          <button class="tab-btn" data-tab="correction">Correction</button>
+          <button class="tab-btn" data-tab="monitoring">Monitoring</button>
         </div>
-        <div class="card glass">
-          <h3>🛠 Semantic Patching</h3>
-          <p>Fix hallucinated content with smart rewrites — using facts from your trusted sources.</p>
+        
+        <div class="tab-content active" data-tab="detection">
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🔍</div>
+              <h3>Fact Verification</h3>
+              <p>Cross-reference claims against trusted knowledge bases in real-time</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📊</div>
+              <h3>Confidence Scoring</h3>
+              <p>Probability-based assessment of statement accuracy</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🔄</div>
+              <h3>Context Analysis</h3>
+              <p>Understand semantic relationships between statements</p>
+            </div>
+          </div>
         </div>
-        <div class="card glass">
-          <h3>🔍 Traceable Output Logs</h3>
-          <p>Every patch is documented and auditable for compliance, debugging, or QA review.</p>
+        
+        <div class="tab-content" data-tab="correction">
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon">✏️</div>
+              <h3>Semantic Rewriting</h3>
+              <p>Intelligently modify incorrect content while preserving intent</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📚</div>
+              <h3>Knowledge Integration</h3>
+              <p>Incorporate facts from your proprietary data sources</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">⚙️</div>
+              <h3>Policy Engine</h3>
+              <p>Apply custom business rules to all generated content</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-content" data-tab="monitoring">
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon">📈</div>
+              <h3>Real-time Dashboard</h3>
+              <p>Monitor hallucination rates and patterns across your models</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🔔</div>
+              <h3>Alert System</h3>
+              <p>Get notified when hallucination rates exceed thresholds</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📑</div>
+              <h3>Audit Logs</h3>
+              <p>Comprehensive records of all detected and patched content</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How It Works -->
+  <!-- Technology -->
   <section class="section dark" id="how">
     <div class="container">
-      <h2>How It Works</h2>
-      <div class="steps">
-        <div class="step"><span>1</span> Intercept LLM responses before they are delivered</div>
-        <div class="step"><span>2</span> Detect hallucinations using real-time scoring models</div>
-        <div class="step"><span>3</span> Apply smart patches from verified knowledge sources</div>
+      <h2>Our Proprietary Technology</h2>
+      <p class="section-subtitle">How Autopatch+ achieves industry-leading accuracy</p>
+      
+      <div class="tech-stack">
+        <div class="tech-item">
+          <div class="tech-icon">🧠</div>
+          <h3>Multi-Model Verification</h3>
+          <p>We use an ensemble of specialized models to cross-validate each claim</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon">🔗</div>
+          <h3>Knowledge Graph</h3>
+          <p>Billions of interconnected facts provide context for verification</p>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon">⚡</div>
+          <h3>Vector Search</h3>
+          <p>Instant retrieval of relevant facts from your knowledge base</p>
+        </div>
+      </div>
+      
+      <div class="architecture-diagram">
+        <div class="architecture-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Input Processing</h4>
+            <p>LLM output is parsed into semantic units</p>
+          </div>
+        </div>
+        <div class="architecture-arrow">→</div>
+        <div class="architecture-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Fact Extraction</h4>
+            <p>Claims are identified and tagged</p>
+          </div>
+        </div>
+        <div class="architecture-arrow">→</div>
+        <div class="architecture-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Verification</h4>
+            <p>Each claim is checked against knowledge sources</p>
+          </div>
+        </div>
+        <div class="architecture-arrow">→</div>
+        <div class="architecture-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Correction</h4>
+            <p>Inaccuracies are rewritten or flagged</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  <section class="section" id="case-studies">
+    <div class="container">
+      <h2>Proven Results</h2>
+      <p class="section-subtitle">See how Autopatch+ is transforming AI reliability</p>
+      
+      <div class="case-studies">
+        <div class="case-study">
+          <div class="case-header">
+            <div class="case-logo">🏥</div>
+            <h3>Healthcare Chatbot</h3>
+          </div>
+          <div class="case-content">
+            <p>Reduced medical misinformation by 92% while maintaining response quality</p>
+            <div class="case-stats">
+              <div class="case-stat">
+                <div class="stat-value">92%</div>
+                <div class="stat-label">Error Reduction</div>
+              </div>
+              <div class="case-stat">
+                <div class="stat-value">4.8★</div>
+                <div class="stat-label">User Rating</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="case-study featured-case">
+          <div class="case-header">
+            <div class="case-logo">🏦</div>
+            <h3>Financial Advisor</h3>
+          </div>
+          <div class="case-content">
+            <p>Eliminated regulatory risks by ensuring 100% compliance with financial disclosures</p>
+            <div class="case-stats">
+              <div class="case-stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Compliance</div>
+              </div>
+              <div class="case-stat">
+                <div class="stat-value">0</div>
+                <div class="stat-label">Regulatory Issues</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="case-study">
+          <div class="case-header">
+            <div class="case-logo">🛒</div>
+            <h3>E-commerce Assistant</h3>
+          </div>
+          <div class="case-content">
+            <p>Increased conversion by 35% by ensuring accurate product information</p>
+            <div class="case-stats">
+              <div class="case-stat">
+                <div class="stat-value">35%</div>
+                <div class="stat-label">Conversion Lift</div>
+              </div>
+              <div class="case-stat">
+                <div class="stat-value">72%</div>
+                <div class="stat-label">Fewer Returns</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Pricing -->
-  <section class="section" id="pricing">
+  <section class="section dark" id="pricing">
     <div class="container">
-      <h2>Pricing Plans</h2>
-      <div class="cards pricing">
-        <div class="card glass">
-          <h3>🌱 Developer</h3>
-          <p>Perfect for early projects.</p>
-          <h4>$0 / month</h4>
+      <h2>Flexible Pricing</h2>
+      <p class="section-subtitle">Choose the plan that fits your needs</p>
+      
+      <div class="pricing-switch">
+        <span>Monthly</span>
+        <label class="switch">
+          <input type="checkbox" id="pricingToggle">
+          <span class="slider round"></span>
+        </label>
+        <span>Annual <span class="discount-badge">(Save 20%)</span></span>
+      </div>
+      
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <h3>Starter</h3>
+          <div class="price monthly-price">$99<span>/mo</span></div>
+          <div class="price annual-price hidden">$79<span>/mo</span></div>
+          <ul class="features-list">
+            <li>Up to 10K verifications/month</li>
+            <li>Basic fact checking</li>
+            <li>Email support</li>
+            <li>Standard accuracy</li>
+          </ul>
+          <button class="btn secondary">Get Started</button>
         </div>
-        <div class="card glass featured">
-          <h3>⚡ Pro</h3>
-          <p>Analytics, patching engine, API access.</p>
-          <h4>$99 / month</h4>
+        
+        <div class="pricing-card featured">
+          <div class="popular-badge">Most Popular</div>
+          <h3>Professional</h3>
+          <div class="price monthly-price">$499<span>/mo</span></div>
+          <div class="price annual-price hidden">$399<span>/mo</span></div>
+          <ul class="features-list">
+            <li>Up to 100K verifications/month</li>
+            <li>Advanced semantic patching</li>
+            <li>Priority support</li>
+            <li>Higher accuracy tier</li>
+            <li>API access</li>
+          </ul>
+          <button class="btn primary">Get Started</button>
         </div>
-        <div class="card glass">
-          <h3>🏢 Enterprise</h3>
-          <p>SLAs, on-prem, security review, support.</p>
-          <h4>Contact us</h4>
+        
+        <div class="pricing-card">
+          <h3>Enterprise</h3>
+          <div class="price">Custom</div>
+          <ul class="features-list">
+            <li>Unlimited verifications</li>
+            <li>Custom knowledge integration</li>
+            <li>24/7 dedicated support</li>
+            <li>Highest accuracy tier</li>
+            <li>On-prem deployment</li>
+            <li>SLA guarantees</li>
+          </ul>
+          <button class="btn secondary" id="openEnterpriseModal">Contact Sales</button>
+        </div>
+      </div>
+      
+      <div class="pricing-footer">
+        <p>Need something different? <a href="#contact">Contact us</a> for custom plans.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <h2>What Our Customers Say</h2>
+      
+      <div class="testimonial-slider">
+        <div class="testimonial active">
+          <div class="testimonial-content">
+            "Autopatch+ transformed our customer support chatbot from a liability to a trusted resource. Hallucinations dropped by 89% in the first week."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">👩‍💼</div>
+            <div class="author-info">
+              <div class="author-name">Sarah Chen</div>
+              <div class="author-title">AI Product Lead, TechCorp</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial">
+          <div class="testimonial-content">
+            "The implementation was seamless and the results were immediate. We've avoided several potential PR disasters thanks to Autopatch+."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">👨‍💻</div>
+            <div class="author-info">
+              <div class="author-name">Mark Williams</div>
+              <div class="author-title">CTO, FinTech Solutions</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial">
+          <div class="testimonial-content">
+            "As a healthcare provider, accuracy is non-negotiable. Autopatch+ gives us confidence that our AI won't provide harmful medical advice."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">👨‍⚕️</div>
+            <div class="author-info">
+              <div class="author-name">Dr. Robert Kim</div>
+              <div class="author-title">CMO, HealthFirst</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-controls">
+          <button class="testimonial-prev">❮</button>
+          <div class="testimonial-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <button class="testimonial-next">❯</button>
         </div>
       </div>
     </div>
@@ -103,11 +452,119 @@
   <!-- Contact -->
   <section class="section dark" id="contact">
     <div class="container">
-      <h2>Join the Early Access List</h2>
-      <form id="contact-form">
-        <input type="email" placeholder="Your email address" required />
-        <button class="btn primary">Submit</button>
-      </form>
+      <h2>Join the Future of Reliable AI</h2>
+      <p class="section-subtitle">Get started with Autopatch+ today</p>
+      
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <div class="info-item">
+            <div class="info-icon">📧</div>
+            <div class="info-text">hello@autopatch.plus</div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div class="info-text">+1 (555) 123-4567</div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🏢</div>
+            <div class="info-text">San Francisco, CA</div>
+          </div>
+          
+          <div class="social-links">
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">LinkedIn</a>
+            <a href="#" class="social-link">GitHub</a>
+          </div>
+        </div>
+        
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your Email" required />
+          </div>
+          <div class="form-group">
+            <select>
+              <option value="" disabled selected>What are you interested in?</option>
+              <option>Early Access</option>
+              <option>Enterprise Solution</option>
+              <option>Partnership</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Your Message"></textarea>
+          </div>
+          <button type="submit" class="btn primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How does Autopatch+ detect hallucinations?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>We use a multi-model verification system that cross-references claims against trusted knowledge sources, analyzes semantic consistency, and evaluates statement confidence levels. Our proprietary algorithms can detect both factual inaccuracies and logical inconsistencies with 99.7% accuracy.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What LLMs do you support?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Autopatch+ works with all major LLMs including GPT-4, Claude, Gemini, LLaMA, Mistral, and others. Our system is model-agnostic and can be integrated with any text-generating AI system through our API or SDK.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How much latency does Autopatch+ add?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Our optimized verification pipeline adds an average of just 150ms to response times. For applications where speed is critical, we offer a streaming mode that begins verification while the LLM is still generating content.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Can I use my own knowledge base?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! Autopatch+ allows you to integrate your proprietary knowledge bases, documentation, and approved content sources. Our system will prioritize your internal knowledge when verifying and patching content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section dark newsletter-section">
+    <div class="container">
+      <div class="newsletter-container">
+        <div class="newsletter-text">
+          <h3>Stay Updated</h3>
+          <p>Subscribe to our newsletter for the latest in AI safety and reliability</p>
+        </div>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required />
+          <button type="submit" class="btn primary">Subscribe</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -117,24 +574,110 @@
     <div class="modal-content glass">
       <span id="closeModal" class="close-btn">&times;</span>
       <h3>Request a Demo</h3>
-      <input type="email" id="modal-email" placeholder="Your email" />
-      <button id="submitDemo" class="btn primary">Send</button>
+      <div class="form-group">
+        <input type="text" id="modal-name" placeholder="Your Name" />
+      </div>
+      <div class="form-group">
+        <input type="email" id="modal-email" placeholder="Your Email" />
+      </div>
+      <div class="form-group">
+        <input type="text" id="modal-company" placeholder="Company" />
+      </div>
+      <div class="form-group">
+        <select id="modal-interest">
+          <option value="" disabled selected>What are you interested in?</option>
+          <option>Product Demo</option>
+          <option>Enterprise Solution</option>
+          <option>Technical Integration</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <button id="submitDemo" class="btn primary">Submit Request</button>
     </div>
   </div>
+
+  <!-- Enterprise Modal -->
+  <div id="enterpriseModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content glass">
+      <span id="closeEnterpriseModal" class="close-btn">&times;</span>
+      <h3>Enterprise Inquiry</h3>
+      <p>Tell us about your needs and we'll create a custom solution for you.</p>
+      <div class="form-group">
+        <input type="text" id="enterprise-name" placeholder="Your Name" />
+      </div>
+      <div class="form-group">
+        <input type="email" id="enterprise-email" placeholder="Your Email" />
+      </div>
+      <div class="form-group">
+        <input type="text" id="enterprise-company" placeholder="Company" />
+      </div>
+      <div class="form-group">
+        <input type="text" id="enterprise-role" placeholder="Your Role" />
+      </div>
+      <div class="form-group">
+        <textarea id="enterprise-needs" placeholder="Tell us about your needs and use cases"></textarea>
+      </div>
+      <button id="submitEnterprise" class="btn primary">Contact Sales</button>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="back-to-top" title="Go to top">↑</button>
 
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>© 2025 Autopatch+ Inc. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Security</a>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo">Autopatch<span>+</span></div>
+          <p>Making AI outputs reliable and trustworthy</p>
+          <div class="footer-social">
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">GitHub</a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#how">Technology</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#case-studies">Case Studies</a>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">Documentation</a>
+          <a href="#">API Reference</a>
+          <a href="#">Blog</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Contact</a>
+          <a href="#">Press</a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2025 Autopatch+ Inc. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Security</a>
+          <a href="#">Cookies</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- Script with defer -->
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="script.js" defer></script>
 </body>
 </html>
