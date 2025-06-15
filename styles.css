@@ -177,7 +177,7 @@ header {
 }
 
 .nav-links a {
-  margin-left: 2rem;
+  margin-left: 2.5rem;
   text-decoration: none;
   color: var(--text-muted);
   font-weight: 500;
