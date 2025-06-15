@@ -1,13 +1,10 @@
 // ===== Smooth Scroll =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
     if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
     }
   });
 });
@@ -31,27 +28,23 @@ form?.addEventListener('submit', e => {
 
 // ===== Modal Logic =====
 const modal = document.getElementById('modal');
-const openModalBtn = document.getElementById('openModal');
-const closeModalBtn = document.getElementById('closeModal');
+const openModal = document.getElementById('openModal');
+const closeModal = document.getElementById('closeModal');
 const submitDemo = document.getElementById('submitDemo');
 const modalEmail = document.getElementById('modal-email');
-const modalBackdrop = document.querySelector('.modal-backdrop');
 
-// Open modal
-openModalBtn.addEventListener('click', () => {
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+openModal?.addEventListener('click', () => {
+  modal.classList.add('visible');
   setTimeout(() => modalEmail.focus(), 300);
 });
 
-// Close modal
-const closeModal = () => {
-  modal.classList.add('hidden');
-  document.body.style.overflow = 'auto';
-};
+closeModal?.addEventListener('click', () => modal.classList.remove('visible'));
 
-closeModalBtn.addEventListener('click', closeModal);
-modalBackdrop.addEventListener('click', closeModal);
+modal?.addEventListener('click', e => {
+  if (e.target.classList.contains('modal-backdrop')) {
+    modal.classList.remove('visible');
+  }
+});
 
 // Escape key closes modal
 window.addEventListener('keydown', e => {
@@ -70,8 +63,8 @@ submitDemo?.addEventListener('click', () => {
   }
 
   simulateLoading(submitDemo, () => {
-    showToast('✅ Demo request submitted! We'll follow up soon.', 'success');
-    closeModal();
+    showToast('✅ Demo request submitted! We’ll follow up soon.', 'success');
+    modal.classList.remove('visible');
     modalEmail.value = '';
   });
 });
@@ -155,79 +148,3 @@ document.head.appendChild(style);
 
 // ===== Log to confirm script is working =====
 console.log('%cAutopatch+ script loaded 🚀', 'color: #8f5eff; font-weight: bold;');
-
-// Intersection Observer for animations
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('animate');
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
-
-// Animate elements when they come into view
-document.querySelectorAll('.card, .step, .stat, .gallery-item').forEach(el => {
-  observer.observe(el);
-});
-
-// Founder section specific animations
-const founderSection = document.getElementById('founders');
-if (founderSection) {
-  const stats = document.querySelectorAll('.stat');
-  const galleryItems = document.querySelectorAll('.gallery-item');
-
-  // Animate stats with counting effect
-  const animateStats = () => {
-    stats.forEach(stat => {
-      const target = parseInt(stat.querySelector('h4').textContent);
-      let current = 0;
-      const increment = target / 50; // Adjust speed here
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          stat.querySelector('h4').textContent = `${target}+`;
-          clearInterval(timer);
-        } else {
-          stat.querySelector('h4').textContent = `${Math.floor(current)}+`;
-        }
-      }, 40);
-    });
-  };
-
-  // Parallax effect for gallery images
-  const handleParallax = (e) => {
-    galleryItems.forEach(item => {
-      const speed = 0.1;
-      const rect = item.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-      
-      if (isVisible) {
-        const x = (window.innerWidth - e.pageX * speed) / 100;
-        const y = (window.innerHeight - e.pageY * speed) / 100;
-        item.style.transform = `translateX(${x}px) translateY(${y}px)`;
-      }
-    });
-  };
-
-  // Initialize animations when founder section is in view
-  const founderObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      animateStats();
-      document.addEventListener('mousemove', handleParallax);
-      founderObserver.unobserve(entries[0].target);
-    }
-  }, observerOptions);
-
-  founderObserver.observe(founderSection);
-}
-
-// Add smooth reveal animation for sections
-document.querySelectorAll('.section').forEach(section => {
-  observer.observe(section);
-});
