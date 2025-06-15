@@ -1,0 +1,217 @@
+/* styles.css */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0f0f1a;
+  color: #f0f0f5;
+}
+
+.container {
+  width: 90%;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+header {
+  padding: 1rem 0;
+  background: rgba(15, 15, 26, 0.95);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #222;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.logo span {
+  color: #8f5eff;
+}
+
+nav a, nav button {
+  margin-left: 1.5rem;
+  text-decoration: none;
+  color: #ccc;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+nav a:hover, nav button:hover {
+  color: white;
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(ellipse at center, rgba(143,94,255,0.2), transparent);
+  z-index: 0;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span {
+  color: #8f5eff;
+}
+
+.hero p {
+  color: #ccc;
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.hero-actions a {
+  margin: 0 0.5rem;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.section.dark {
+  background: #13131f;
+}
+
+.cards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: #1a1a2e;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.card.featured {
+  border: 2px solid #8f5eff;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.steps {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.step {
+  padding: 1rem;
+  background: #1e1e2f;
+  border-left: 4px solid #8f5eff;
+  border-radius: 8px;
+}
+
+input {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: none;
+  width: 280px;
+  max-width: 90%;
+  margin-top: 1rem;
+}
+
+button.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #8f5eff;
+  color: white;
+}
+
+.btn.secondary {
+  background: #333;
+  color: white;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  background: #0b0b14;
+  color: #777;
+}
+
+.footer-links a {
+  margin-left: 1rem;
+  color: #777;
+  text-decoration: none;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.visible {
+  display: flex;
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  position: relative;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  z-index: 2;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ccc;
+}
