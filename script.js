@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open modal
     videoBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        demoVideo.src = 'https://www.youtube.com/watch?v=xSUqYUjYGGk';
+        demoVideo.src = 'https://www.youtube.com/embed/xSUqYUjYGGk?autoplay=1';
         videoModal.classList.add('visible');
         document.body.style.overflow = 'hidden';
       });
